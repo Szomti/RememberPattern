@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'level_select_screen.dart';
+import 'game_screen.dart';
 
-class MenuScreen extends StatefulWidget {
-  const MenuScreen({super.key});
+class LevelSelectScreen extends StatefulWidget {
+  const LevelSelectScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => MenuScreenState();
+  State<StatefulWidget> createState() => LevelSelectScreenState();
 }
 
-class MenuScreenState extends State<MenuScreen> {
+class LevelSelectScreenState extends State<LevelSelectScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,18 +22,10 @@ class MenuScreenState extends State<MenuScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _createHeader(),
-              _createBtn(
-                'Play',
-                () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const LevelSelectScreen(),
-                    ),
-                  );
-                },
-              ),
-              _createBtn('Settings', () {}),
+              _createBtn('Easy', GameLevel.easy),
+              _createBtn('Normal', GameLevel.normal),
+              _createBtn('Hard', GameLevel.hard),
+              _createBtn('Sandbox', GameLevel.sandbox),
             ],
           ),
         ),
@@ -48,10 +40,10 @@ class MenuScreenState extends State<MenuScreen> {
         children: [
           Expanded(
             child: Text(
-              'Remember Patter',
+              'Select the level',
               style: TextStyle(
-                fontSize: 32.0,
-                fontWeight: FontWeight.w600,
+                fontSize: 24.0,
+                fontWeight: FontWeight.w500,
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
@@ -62,14 +54,21 @@ class MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  Widget _createBtn(String text, void Function() onPressed) {
+  Widget _createBtn(String text, GameLevel gameLevel) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
             child: ElevatedButton(
-              onPressed: onPressed,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => GameScreen(gameLevel),
+                  ),
+                );
+              },
               child: Text(text, textAlign: TextAlign.center),
             ),
           ),
