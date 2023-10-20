@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:remember_pattern/app/navigator_extension.dart';
 
-import 'game_screen.dart';
+import 'game/game_screen.dart';
 
 class LevelSelectScreen extends StatefulWidget {
   const LevelSelectScreen({super.key});
@@ -61,14 +62,10 @@ class LevelSelectScreenState extends State<LevelSelectScreen> {
         children: [
           Expanded(
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => GameScreen(gameLevel),
-                  ),
-                );
-              },
+              onPressed: () => const Navigator().pushNoAnimation(
+                context,
+                (_, __, ___) => GameScreen(gameLevel),
+              ),
               child: Text(text, textAlign: TextAlign.center),
             ),
           ),

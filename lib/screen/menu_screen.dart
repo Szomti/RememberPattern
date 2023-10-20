@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:remember_pattern/app/navigator_extension.dart';
 
 import 'level_select_screen.dart';
 
@@ -24,14 +25,10 @@ class MenuScreenState extends State<MenuScreen> {
               _createHeader(),
               _createBtn(
                 'Play',
-                () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const LevelSelectScreen(),
-                    ),
-                  );
-                },
+                () => const Navigator().pushNoAnimation(
+                  context,
+                  (_, __, ___) => const LevelSelectScreen(),
+                ),
               ),
               _createBtn('Settings', () {}),
             ],
